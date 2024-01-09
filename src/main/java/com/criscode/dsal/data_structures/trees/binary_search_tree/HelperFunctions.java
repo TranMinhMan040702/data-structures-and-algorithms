@@ -4,7 +4,15 @@ import java.util.ArrayList;
 
 public class HelperFunctions {
 
-    // traverse in order
+    //                  9
+    //          4               20
+    //       1     6        15      170
+    //         3
+
+    // 1 3 4 6 9 15 20 170
+    // 9 4 1 3 6 20 15 170
+    // 3 1 6 4 15 170 20 9
+
     public ArrayList<Integer> traverseInOrder(Node node, ArrayList<Integer> array) {
         if (node.left != null) {
             traverseInOrder(node.left, array);
@@ -27,7 +35,6 @@ public class HelperFunctions {
         return array;
     }
 
-    // traverse post order
     public ArrayList<Integer> traversePostOrder(Node node, ArrayList<Integer> array) {
         if (node.left != null) {
             traversePostOrder(node.left, array);

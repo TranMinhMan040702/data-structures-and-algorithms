@@ -1,8 +1,14 @@
 package com.criscode.dsal.data_structures.trees.binary_search_tree;
 
+import lombok.Getter;
+
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
 
 public class BinarySearchTree {
+    @Getter
     private Node root;
 
     public BinarySearchTree() {
@@ -50,6 +56,40 @@ public class BinarySearchTree {
             }
         }
         return false;
+    }
+
+    public List<Integer> breadthFirstSearch() {
+        Node currentNode = this.root;
+        List<Integer> list = new ArrayList<>();
+        Queue<Node> queue = new ArrayDeque<>();
+        queue.add(currentNode);
+
+        while (!queue.isEmpty()) {
+            currentNode = queue.poll();
+            list.add(currentNode.value);
+            if (currentNode.left != null) {
+                queue.add(currentNode.left);
+            }
+            if (currentNode.right != null) {
+                queue.add(currentNode.right);
+            }
+        }
+        return list;
+    }
+
+    public List<Integer> breadthFirstSearchRecursive(List<Integer> list, Queue<Node> queue) {
+        if (queue.isEmpty()) {
+            return list;
+        }
+        Node currentNode = queue.poll();
+        list.add(currentNode.value);
+        if (currentNode.left != null) {
+            queue.add(currentNode.left);
+        }
+        if (currentNode.right != null) {
+            queue.add(currentNode.right);
+        }
+        return breadthFirstSearchRecursive(list, queue);
     }
 
     HelperFunctions hlp = new HelperFunctions();
